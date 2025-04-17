@@ -1,6 +1,5 @@
 import { Button } from "../components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../components/ui/card";
-import LoginForm from "../components/ui/loginForm";
 
 export default function Home() {
   return (
@@ -12,11 +11,10 @@ export default function Home() {
             Build, test, and deploy AI-powered applications with a modern tech stack designed for rapid development
           </p>
           <div className="flex gap-4">
-            <Button className="px-6 py-3 text-lg font-semibold">Get Started</Button>
-            <Button variant="outline" className="px-6 py-3 text-lg font-semibold">View Documentation</Button>
+            <a href="https://github.com/banana-hammers/origins" target="_blank" rel="noopener noreferrer">
+              <Button className="px-6 py-3 text-lg font-semibold">Get Started</Button>
+            </a>
           </div>
-
-          <LoginForm />
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 w-full">
             <Card>
