@@ -1,55 +1,79 @@
 "use client";
 
-import { useState } from 'react';
-import { signIn } from '../../lib/auth';
-import { Button } from "./button";
-import { Input } from "./input";
-import { Label } from "./label";
+import { useForm } from "react-hook-form"
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "./form"
+import { Input } from "./input"
+import { Button } from "./button"
+import { signIn } from '../../lib/auth'
+
+type LoginFormValues = {
+  email: string
+  password: string
+}
 
 export default function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  const form = useForm<LoginFormValues>({
+    defaultValues: { email: "", password: "" }
+  })
+  const { handleSubmit, control } = form
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (values: LoginFormValues) => {
     try {
-      setError(null);
-      await signIn(email, password);
-      alert('Signed in successfully!');
+      await signIn(values.email, values.password)
+      alert('Signed in successfully!')
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('An unknown error occurred.');
-      }
+      console.error(err)
+      // ideally set a form-level error or toast
     }
-  };
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="flex flex-col space-y-2">
-        <Label htmlFor="email">Email</Label>
-        <Input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
+    <Form {...form}>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={control}
+          name="email"
+          rules={{
+            required: 'Email is required',
+            pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Invalid email' }
+          }}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input {...field} type="email" placeholder="you@example.com" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-      </div>
-      <div className="flex flex-col space-y-2">
-        <Label htmlFor="password">Password</Label>
-        <Input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
+
+        <FormField
+          control={control}
+          name="password"
+          rules={{ required: 'Password is required', minLength: { value: 6, message: 'Password must be at least 6 characters' } }}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input {...field} type="password" placeholder="••••••••" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-      </div>
-      {error && <p className="text-red-500">{error}</p>}
-      <Button type="submit" className="w-full">Sign In</Button>
-    </form>
-  );
+
+        <Button type="submit" className="w-full">
+          Sign In
+        </Button>
+      </form>
+    </Form>
+  )
 }
