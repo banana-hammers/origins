@@ -1,20 +1,25 @@
-import { Button } from "../components/ui/button";
+import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../components/ui/card";
+import { NavAuth } from "../components/ui/navAuth";
 
 export default function Home() {
   return (
-    <div className="min-h-screen p-8">
-      <main className="container mx-auto max-w-5xl">
+    <div className="min-h-screen">
+      <nav className="border-b p-4">
+        <div className="container mx-auto flex justify-between items-center">
+          <Link href="/" className="text-xl font-bold text-primary">
+            Origins
+          </Link>
+          <NavAuth />
+        </div>
+      </nav>
+
+      <main className="container mx-auto max-w-5xl p-8">
         <div className="flex flex-col items-center justify-center space-y-8 text-center">
           <h1 className="text-5xl font-bold tracking-tight text-primary">Rapid AI Prototyping Platform</h1>
           <p className="max-w-[600px] text-secondary">
             Build, test, and deploy AI-powered applications with a modern tech stack designed for rapid development
           </p>
-          <div className="flex gap-4">
-            <a href="https://github.com/banana-hammers/origins" target="_blank" rel="noopener noreferrer">
-              <Button className="px-6 py-3 text-lg font-semibold">Get Started</Button>
-            </a>
-          </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 w-full">
             <Card>

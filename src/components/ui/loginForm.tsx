@@ -11,7 +11,7 @@ import {
 } from "./form"
 import { Input } from "./input"
 import { Button } from "./button"
-import { signIn } from '../../lib/auth'
+import { useAuth } from '../../lib/auth'
 
 type LoginFormValues = {
   email: string
@@ -19,6 +19,7 @@ type LoginFormValues = {
 }
 
 export default function LoginForm() {
+  const { signIn } = useAuth();
   const form = useForm<LoginFormValues>({
     defaultValues: { email: "", password: "" }
   })
@@ -27,10 +28,10 @@ export default function LoginForm() {
   const onSubmit = async (values: LoginFormValues) => {
     try {
       await signIn(values.email, values.password)
-      alert('Signed in successfully!')
+      // Success! The auth state will be updated automatically
     } catch (err: unknown) {
       console.error(err)
-      // ideally set a form-level error or toast
+      alert('Invalid email or password')
     }
   }
 
