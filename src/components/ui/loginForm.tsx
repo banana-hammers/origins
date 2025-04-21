@@ -27,17 +27,17 @@ export default function LoginForm() {
 
   const onSubmit = async (values: LoginFormValues) => {
     try {
-      await signIn(values.email, values.password)
+      await signIn(values.email, values.password);
       // Success! The auth state will be updated automatically
     } catch (err: unknown) {
-      console.error(err)
-      alert('Invalid email or password')
+      console.error('Error details:', err); // Improved error logging
+      alert('Invalid email or password');
     }
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <FormField
           control={control}
           name="email"
@@ -47,11 +47,16 @@ export default function LoginForm() {
           }}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel className="text-foreground">Email</FormLabel>
               <FormControl>
-                <Input {...field} type="email" placeholder="you@example.com" />
+                <Input 
+                  {...field} 
+                  type="email" 
+                  placeholder="you@example.com" 
+                  className="border-input/70 bg-card focus-visible:ring-primary/30"
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-destructive" />
             </FormItem>
           )}
         />
@@ -62,16 +67,24 @@ export default function LoginForm() {
           rules={{ required: 'Password is required', minLength: { value: 6, message: 'Password must be at least 6 characters' } }}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel className="text-foreground">Password</FormLabel>
               <FormControl>
-                <Input {...field} type="password" placeholder="••••••••" />
+                <Input 
+                  {...field} 
+                  type="password" 
+                  placeholder="••••••••" 
+                  className="border-input/70 bg-card focus-visible:ring-primary/30"
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-destructive" />
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="w-full">
+        <Button 
+          type="submit" 
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+        >
           Sign In
         </Button>
       </form>

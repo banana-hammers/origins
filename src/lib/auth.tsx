@@ -43,16 +43,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
         if (error) throw error;
       },
       signIn: async (email: string, password: string) => {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { data: { session }, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
+        if (session?.refresh_token) {
+          localStorage.setItem('refresh_token', session.refresh_token); // Store refresh token
+        }
       },
       signOut: async () => {
         const { error } = await supabase.auth.signOut();
         if (error) throw error;
+        localStorage.removeItem('refresh_token'); // Clear refresh token on sign out
       },
     }),
     [user, loading]
   );
+
+  if (loading) {
+    return <div>Loading...</div>; // Delay rendering until user state is resolved
+  }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

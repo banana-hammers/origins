@@ -32,14 +32,14 @@ export default function SignUpForm() {
       await signUp(values.email, values.password);
       alert('Check your email to confirm your account!');
     } catch (err: unknown) {
-      console.error(err);
+      console.error('Error details:', err);
       alert('Error signing up. Please try again.');
     }
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <FormField
           control={control}
           name="email"
@@ -49,11 +49,16 @@ export default function SignUpForm() {
           }}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel className="text-foreground">Email</FormLabel>
               <FormControl>
-                <Input {...field} type="email" placeholder="you@example.com" />
+                <Input 
+                  {...field} 
+                  type="email" 
+                  placeholder="you@example.com" 
+                  className="border-input/70 bg-card focus-visible:ring-primary/30"
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-destructive" />
             </FormItem>
           )}
         />
@@ -67,11 +72,16 @@ export default function SignUpForm() {
           }}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel className="text-foreground">Password</FormLabel>
               <FormControl>
-                <Input {...field} type="password" placeholder="••••••••" />
+                <Input 
+                  {...field} 
+                  type="password" 
+                  placeholder="••••••••" 
+                  className="border-input/70 bg-card focus-visible:ring-primary/30" 
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-destructive" />
             </FormItem>
           )}
         />
@@ -85,16 +95,24 @@ export default function SignUpForm() {
           }}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Confirm Password</FormLabel>
+              <FormLabel className="text-foreground">Confirm Password</FormLabel>
               <FormControl>
-                <Input {...field} type="password" placeholder="••••••••" />
+                <Input 
+                  {...field} 
+                  type="password" 
+                  placeholder="••••••••" 
+                  className="border-input/70 bg-card focus-visible:ring-primary/30"
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-destructive" />
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="w-full">
+        <Button 
+          type="submit" 
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+        >
           Sign Up
         </Button>
       </form>
