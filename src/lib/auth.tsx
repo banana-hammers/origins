@@ -46,20 +46,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
         const { data: { session }, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         if (session?.refresh_token) {
-          localStorage.setItem('refresh_token', session.refresh_token); // Store refresh token
+          localStorage.setItem('refresh_token', session.refresh_token);
         }
       },
       signOut: async () => {
-        const { error } = await supabase.auth.signOut();
-        if (error) throw error;
-        localStorage.removeItem('refresh_token'); // Clear refresh token on sign out
+        try {
+          // Clear local storage first
+          localStorage.removeItem('refresh_token');
+          localStorage.removeItem('supabase.auth.token');
+          
+          // Sign out from Supabase
+          const { error } = await supabase.auth.signOut({ scope: 'local' });
+          if (error) throw error;
+          
+          // Force clear the user state
+          setUser(null);
+        } catch (error) {
+          console.error('Sign out error:', error);
+          throw error;
+        }
       },
     }),
     [user, loading]
   );
 
   if (loading) {
-    return <div>Loading...</div>; // Delay rendering until user state is resolved
+    return <div>Loading...</div>;
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
