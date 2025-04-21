@@ -30,7 +30,7 @@ export function MainNav({ items }: MainNavProps = {}) {
   const pathname = usePathname();
 
   return (
-    <NavigationMenu className="max-w-full px-4">
+    <NavigationMenu viewport={false} className="max-w-full px-4">
       <NavigationMenuList className="w-full justify-between space-x-6 md:space-x-12">
         <div className="flex items-center space-x-4 md:space-x-8 lg:space-x-12">
           <NavigationMenuItem>
@@ -77,7 +77,7 @@ export function MainNav({ items }: MainNavProps = {}) {
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Account</NavigationMenuTrigger>
-                <NavigationMenuContent>
+                <NavigationMenuContent className="left-1/2 -translate-x-1/2">
                   <div className="w-[200px] p-3">
                     <div className="mb-2 text-sm text-muted-foreground">
                       {user.email}
