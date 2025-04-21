@@ -51,16 +51,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
       },
       signOut: async () => {
         try {
-          // Clear local storage first
-          localStorage.removeItem('refresh_token');
-          localStorage.removeItem('supabase.auth.token');
+          // Clear local storage first to prevent any token-related issues
+          localStorage.clear();
           
-          // Sign out from Supabase
+          // Force clear the user state before signing out
+          setUser(null);
+          
+          // Sign out from Supabase with local scope
           const { error } = await supabase.auth.signOut({ scope: 'local' });
           if (error) throw error;
-          
-          // Force clear the user state
-          setUser(null);
         } catch (error) {
           console.error('Sign out error:', error);
           throw error;
@@ -74,7 +73,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
     return <div>Loading...</div>;
   }
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export function useAuth(): AuthContextType {
