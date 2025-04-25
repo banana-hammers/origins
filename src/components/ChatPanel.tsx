@@ -35,7 +35,7 @@ export function ChatPanel({ open, onOpenChange }: ChatPanelProps) {
       setMessages([
         {
           role: "assistant",
-          content: "Hello! I'm your Lore Builder assistant. I can help you rapidly develop the seed and roots of your TTRPG campaign. What kind of world would you like to create?"
+          content: "Hello! I&apos;m your Lore Builder assistant. I can help you rapidly develop the seed and roots of your TTRPG campaign. What kind of world would you like to create?"
         }
       ]);
     }
@@ -96,13 +96,13 @@ export function ChatPanel({ open, onOpenChange }: ChatPanelProps) {
         if (lastIndex >= 0 && updatedMessages[lastIndex].role === "assistant" && updatedMessages[lastIndex].content === "") {
           updatedMessages[lastIndex] = {
             role: "assistant",
-            content: "I'm sorry, I encountered an error trying to respond. Please try again."
+            content: "I&apos;m sorry, I encountered an error trying to respond. Please try again."
           };
         } else {
           // Otherwise add a new error message
           updatedMessages.push({
             role: "assistant",
-            content: "I'm sorry, I encountered an error trying to respond. Please try again."
+            content: "I&apos;m sorry, I encountered an error trying to respond. Please try again."
           });
         }
         
@@ -122,7 +122,7 @@ export function ChatPanel({ open, onOpenChange }: ChatPanelProps) {
             <SheetTitle>Lore Builder</SheetTitle>
           </div>
           <SheetDescription>
-            I'll help you craft your campaign world
+            I&apos;ll help you craft your campaign world
           </SheetDescription>
           <div className="mt-2">
             <div className="text-sm text-muted-foreground mb-1">AI Model:</div>
