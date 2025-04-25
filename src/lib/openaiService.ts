@@ -1,35 +1,45 @@
 import OpenAI from 'openai';
-import dotenv from 'dotenv';
-
-// Load environment variables
-dotenv.config();
 
 // Initialize the OpenAI client
 const openai = new OpenAI({
-  apiKey: process.env.local.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 /**
  * Generate text using OpenAI's GPT model
  * @param prompt The prompt to send to the API
- * @param model The model to use (defaults to gpt-4o)
+ * @param model The model to use (defaults to gpt-4o-mini)
  * @param maxTokens Maximum number of tokens to generate
+ * @param stream Whether to stream the response (defaults to false)
  */
 export async function generateText(
   prompt: string,
-  model: string = 'gpt-4o',
-  maxTokens: number = 500
+  model: string = 'gpt-4o-mini',
+  maxTokens: number = 500,
+  stream: boolean = false
 ) {
   try {
     const response = await openai.chat.completions.create({
       model,
       messages: [{ role: 'user', content: prompt }],
       max_tokens: maxTokens,
+      stream,
     });
 
+    if (stream) {
+      return {
+        success: true,
+        data: response, // Return the stream directly
+        stream: true,
+      };
+    }
+
+    // Need to cast response to access choices safely
+    const completionResponse = response as OpenAI.Chat.Completions.ChatCompletion;
+    
     return {
       success: true,
-      data: response.choices[0].message.content,
+      data: completionResponse.choices[0].message.content,
     };
   } catch (error) {
     if (error instanceof Error) {

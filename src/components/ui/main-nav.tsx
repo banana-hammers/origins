@@ -69,6 +69,22 @@ export function MainNav({ items }: MainNavProps = {}) {
           {user ? (
             <>
               <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link 
+                    href="/lore" 
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "transition-colors",
+                      pathname === "/lore" 
+                        ? "text-foreground" 
+                        : "text-muted-foreground hover:text-foreground/90"
+                    )}
+                  >
+                    Lore
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
                 <NavigationMenuTrigger>Account</NavigationMenuTrigger>
                 <NavigationMenuContent className="left-1/2 -translate-x-1/2">
                   <div className="w-[200px] p-3">
