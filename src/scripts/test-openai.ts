@@ -41,10 +41,14 @@ async function testOpenAIIntegration() {
     }
     
     console.log('\nOpenAI integration test completed successfully!');
-  } catch (error) {
-    console.error('Error testing OpenAI integration:', error.message);
-    if (error.response) {
-      console.error('Response data:', error.response.data);
+  } catch (error: unknown) {
+    if (error && typeof error === 'object' && 'message' in error) {
+      console.error('Error testing OpenAI integration:', error.message);
+      if ('response' in error && error.response && typeof error.response === 'object' && 'data' in error.response) {
+        console.error('Response data:', error.response.data);
+      }
+    } else {
+      console.error('An unknown error occurred:', error);
     }
   }
 }
