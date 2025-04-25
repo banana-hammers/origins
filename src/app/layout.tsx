@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "../components/ui/providers";
@@ -17,7 +17,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Origins",
   description: "Created with love by Ryan Eves",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

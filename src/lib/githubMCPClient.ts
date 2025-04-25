@@ -1,7 +1,4 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const githubMCPUrl = process.env.MCP_SERVER_URL!;
 const githubToken = process.env.GITHUB_PERSONAL_ACCESS_TOKEN!;
