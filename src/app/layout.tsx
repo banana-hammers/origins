@@ -37,6 +37,7 @@ export default function RootLayout({
               <div className="container flex h-14 items-center">
                 <MainNav />
               </div>
+              {/* Removed Task Manager navigation link */}
             </nav>
             <main className="flex-1">
               {children}

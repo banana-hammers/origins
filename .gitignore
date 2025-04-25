@@ -71,3 +71,6 @@ out/
 *.swo
 *.bak
 *.tmp
+
+# Ignore transition plan documentation
+.github/transition-plan.md
