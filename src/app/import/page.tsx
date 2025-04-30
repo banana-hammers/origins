@@ -1,14 +1,44 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import { fetchUserEstimates } from '@/lib/estimateService';
 import { FileUpload } from '@/components/FileUpload';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Upload, FileText, BrainCircuit } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
+import { Badge } from '@/components/ui/badge';
+import { Estimate } from '@/lib/types';
 
 export default function StandaloneImportPage() {
   const { user, loading } = useAuth();
+  const [estimates, setEstimates] = useState<Estimate[] | null>(null);
+  const [estimatesLoading, setEstimatesLoading] = useState(false);
+  const [estimatesError, setEstimatesError] = useState<string | null>(null);
+  const router = useRouter();
+
+  // Fetch estimates for the current user
+  const loadEstimates = useCallback(async () => {
+    if (!user) return;
+    setEstimatesLoading(true);
+    setEstimatesError(null);
+    try {
+      const data = await fetchUserEstimates(user.id);
+      setEstimates(data);
+    } catch (error: unknown) {
+      console.error('Error loading estimates:', error);
+      setEstimatesError('Failed to load estimates.');
+    } finally {
+      setEstimatesLoading(false);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      loadEstimates();
+    }
+  }, [user, loadEstimates]);
 
   // Redirect if user is not authenticated
   useEffect(() => {
@@ -27,12 +57,60 @@ export default function StandaloneImportPage() {
     );
   }
 
-  // Render import UI once authenticated
+  // Insert estimates list above the import UI
   return (
     <div className="max-w-5xl mx-auto pt-8 pb-16">
       <div className="mb-8">
         <h1 className="text-3xl font-bold">Intelligent Import</h1>
       </div>
+      {/* Estimates List Section */}
+      <div className="mb-8">
+        <h2 className="text-xl font-semibold mb-4">Your Estimates</h2>
+        {estimatesLoading ? (
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <Loader2 className="h-5 w-5 animate-spin" />
+            Loading estimates...
+          </div>
+        ) : estimatesError ? (
+          <div className="text-red-500">{estimatesError}</div>
+        ) : estimates && estimates.length === 0 ? (
+          <div className="text-muted-foreground">No estimates found. Start by importing a file!</div>
+        ) : (
+          <div className="flex flex-col gap-4">
+            {estimates && estimates.map((estimate) => (
+              <Card
+                key={estimate.id}
+                className="cursor-pointer transition-shadow hover:shadow-lg"
+                onClick={() => router.push(`/estimate/${estimate.id}`)}
+                tabIndex={0}
+                aria-label={`View estimate ${estimate.name}`}
+                onKeyDown={e => { if (e.key === 'Enter') router.push(`/estimate/${estimate.id}`); }}
+              >
+                <CardHeader className="flex flex-row items-center justify-between gap-4 pb-2">
+                  <div>
+                    <CardTitle className="text-lg">{estimate.name}</CardTitle>
+                    <CardDescription className="mt-1">{estimate.description || 'No description'}</CardDescription>
+                  </div>
+                  <Badge variant={estimate.is_draft ? 'secondary' : 'default'}>
+                    {estimate.is_draft ? 'Draft' : 'Final'}
+                  </Badge>
+                </CardHeader>
+                <CardContent className="flex flex-row items-center justify-between pt-0">
+                  <div className="text-base font-semibold">
+                    {estimate.total_material + estimate.total_labor > 0
+                      ? `$${(estimate.total_material + estimate.total_labor).toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 }).replace('$', '')}`
+                      : 'No amount'}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    Last updated: {new Date(estimate.updated_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
+      </div>
+      {/* ...existing import UI... */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-2">
           <FileUpload />

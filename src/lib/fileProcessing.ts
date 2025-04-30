@@ -15,6 +15,7 @@ export async function processPDF(fileBuffer: Buffer): Promise<Buffer> {
     // placeholder indicating where the actual implementation would go
     
     // Placeholder for the real implementation
+    console.log(`Received PDF file buffer of size: ${fileBuffer.length} bytes`);
     throw new Error('PDF processing not implemented yet - need to install pdf processing library');
     
     // Example of what real implementation might look like:
@@ -64,17 +65,25 @@ export async function processImage(fileBuffer: Buffer): Promise<Buffer> {
 }
 
 /**
+ * Represents a row from a CSV file
+ */
+export interface CSVRow {
+  [key: string]: string | number | boolean | null;
+}
+
+/**
  * Processes a CSV file and converts it to structured JSON
  * @param fileBuffer The CSV file as a Buffer
  * @returns An array of objects, each representing a row in the CSV
  */
-export async function processCSV(fileBuffer: Buffer): Promise<any[]> {
+export async function processCSV(fileBuffer: Buffer): Promise<CSVRow[]> {
   try {
     // In a real implementation, we would use a library like csv-parser or papaparse
     // to parse the CSV. For this implementation, we'll return a placeholder
     // indicating where the actual implementation would go
     
     // Placeholder for the real implementation
+    console.log(`Received CSV file buffer of size: ${fileBuffer.length} bytes`);
     throw new Error('CSV processing not implemented yet - need to install CSV parsing library');
     
     // Example of what real implementation might look like:

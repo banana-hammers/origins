@@ -31,6 +31,10 @@ CREATE TABLE IF NOT EXISTS project_estimate_options (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Add archived column to project_estimate_options if not exists
+ALTER TABLE project_estimate_options
+ADD COLUMN IF NOT EXISTS archived BOOLEAN DEFAULT FALSE;
+
 -- Project Estimate Items Table (for storing line items in an estimate)
 CREATE TABLE IF NOT EXISTS project_estimate_items (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

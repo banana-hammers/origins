@@ -6,11 +6,14 @@ import { Loader2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
-interface EstimatePageProps {
-  params: {
-    id: string;
-  };
-}
+type SegmentParams = {
+  id: string;
+};
+
+type EstimatePageProps = {
+  params: Promise<SegmentParams>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 async function EstimateContent({ id }: { id: string }) {
   try {
@@ -61,6 +64,7 @@ async function EstimateContent({ id }: { id: string }) {
 }
 
 export default async function EstimatePage({ params }: EstimatePageProps) {
+  const resolvedParams = await params;
   return (
     <div className="container max-w-5xl py-8">
       <Suspense
@@ -71,7 +75,7 @@ export default async function EstimatePage({ params }: EstimatePageProps) {
           </div>
         }
       >
-        <EstimateContent id={await params.id} />
+        <EstimateContent id={resolvedParams.id} />
       </Suspense>
     </div>
   );

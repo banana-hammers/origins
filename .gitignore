@@ -74,3 +74,5 @@ out/
 
 # Ignore transition plan documentation
 .github/transition-plan.md
+# Ignore documentation directory
+docs/

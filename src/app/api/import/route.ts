@@ -141,7 +141,14 @@ export async function POST(request: NextRequest) {
       }
     } else if (validation.fileType === 'csv') {
       try {
-        extractedItems = await processCSV(fileBuffer);
+        const csvRows = await processCSV(fileBuffer);
+        extractedItems = csvRows.map(row => ({
+          description: String(row.description || ''),
+          quantity: parseFloat(row.quantity as string) || 0,
+          unit: row.unit as string,
+          price: parseFloat(row.price as string) || undefined,
+          ...row
+        }));
       } catch (error) {
         // Log the error for debugging
         console.error('CSV processing error:', error);

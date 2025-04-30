@@ -1,4 +1,7 @@
+// This file now includes the fetchUserEstimates function that was previously in a separate /lib folder.
+// The function was consolidated here as part of standardizing the codebase structure to use /src/lib.
 import { supabase } from './supabaseClient';
+import { Estimate } from './types';
 
 interface EstimateItem {
   material_id?: string | null;
@@ -8,6 +11,19 @@ interface EstimateItem {
   material_price?: number;
   labor_price?: number;
   confidence?: number;
+}
+
+// Fetch non-archived, user-owned estimates sorted by updated_at DESC
+export async function fetchUserEstimates(userId: string): Promise<Estimate[]> {
+  const { data, error } = await supabase
+    .from('project_estimate_options')
+    .select('*')
+    .eq('created_by', userId)
+    .eq('archived', false)
+    .order('updated_at', { ascending: false });
+
+  if (error) throw error;
+  return (data as Estimate[]) || [];
 }
 
 /**
