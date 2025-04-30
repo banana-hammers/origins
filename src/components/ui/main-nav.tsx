@@ -85,6 +85,22 @@ export function MainNav({ items }: MainNavProps = {}) {
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link 
+                    href="/import" 
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "transition-colors",
+                      pathname === "/import" 
+                        ? "text-foreground" 
+                        : "text-muted-foreground hover:text-foreground/90"
+                    )}
+                  >
+                    Intelligent Import
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
                 <NavigationMenuTrigger>Account</NavigationMenuTrigger>
                 <NavigationMenuContent className="left-1/2 -translate-x-1/2">
                   <div className="w-[200px] p-3">
