@@ -35,7 +35,7 @@ export function ChatPanel({ open, onOpenChange }: ChatPanelProps) {
       setMessages([
         {
           role: "assistant",
-          content: "Hello! I'm your planning assistant. How can I help you today?"
+          content: "Hello! I&aposm your planning assistant. How can I help you today?"
         }
       ]);
     }
@@ -62,6 +62,7 @@ export function ChatPanel({ open, onOpenChange }: ChatPanelProps) {
       
       // Create the prompt with conversation history for context
       const conversationHistory = messages.map(msg => `${msg.role}: ${msg.content}`).join("\n");
+
       const prompt = `You are a planning assistant that helps users organize and plan their tasks and projects. Offer clear suggestions, ask clarifying questions, and provide step-by-step guidance to achieve their goals.\n\nConversation history:\n${conversationHistory}\n\nUser: ${message}\nAssistant:`;
       
       // Stream the response and update the UI with each chunk
@@ -122,7 +123,7 @@ export function ChatPanel({ open, onOpenChange }: ChatPanelProps) {
             <SheetTitle>Planner Assistant</SheetTitle>
           </div>
           <SheetDescription>
-            I'll help you organize your tasks and projects
+            I&apos;ll help you organize your tasks and projects
           </SheetDescription>
           <div className="mt-2">
             <div className="text-sm text-muted-foreground mb-1">AI Model:</div>
