@@ -49,19 +49,23 @@ export function ChatPanel({ open, onOpenChange }: ChatPanelProps) {
   }, [messages]);
 
   const handleSendMessage = async (message: string) => {
-    // Add user message to chat
     const userMessage: Message = { role: "user", content: message };
-    setMessages(prev => [...prev, userMessage]);
-    
-    // Create a placeholder for the AI response
+
+    // Build the conversation history including the new user message
+    const conversationHistory = [...messages, userMessage]
+      .map(msg => `${msg.role}: ${msg.content}`)
+      .join("\n");
+
+    // Add the user message and a placeholder for the assistant in a single update
+    setMessages(prev => [
+      ...prev,
+      userMessage,
+      { role: "assistant", content: "" }
+    ]);
+
     setLoading(true);
-    
+
     try {
-      // Add a placeholder message that will be updated with streaming content
-      setMessages(prev => [...prev, { role: "assistant", content: "" }]);
-      
-      // Create the prompt with conversation history for context
-      const conversationHistory = messages.map(msg => `${msg.role}: ${msg.content}`).join("\n");
       const prompt = `You are a Lore Builder, an AI assistant that helps tabletop role-playing game (TTRPG) game masters rapidly develop the seed and roots of their campaigns. Help the user create compelling settings, characters, factions, and plot hooks for their TTRPG campaign. Be creative, ask insightful questions, and provide detailed suggestions to help build a rich campaign world.\n\nConversation history:\n${conversationHistory}\n\nUser: ${message}\nAssistant:`;
       
       // Stream the response and update the UI with each chunk

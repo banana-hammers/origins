@@ -126,26 +126,29 @@ export function createEventStream(response: ReadableStream<Uint8Array>): Readabl
  * @param data The SSE stream
  */
 export async function* parseSSEStream(data: ReadableStream<Uint8Array>) {
-  // Fix parser creation with proper callbacks
-  const parser = createParser({
-    onEvent: (event: EventSourceMessage) => {
-      // Check for event data
-      return event.data;
+  const decoder = new TextDecoder();
+  const reader = data.getReader();
+  const queue: string[] = [];
+
+  // Proper parser callback that pushes parsed events into a queue
+  const parser = createParser((event: EventSourceMessage) => {
+    if (event.type === 'event' && event.data) {
+      queue.push(event.data);
     }
   });
-  
-  const reader = data.getReader();
-  const decoder = new TextDecoder();
-  
+
   try {
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
-      
-      const text = decoder.decode(value);
-      parser.feed(text);
-      if (text && text !== 'data: [DONE]') {
-        yield text;
+
+      parser.feed(decoder.decode(value));
+
+      while (queue.length > 0) {
+        const chunk = queue.shift();
+        if (chunk && chunk !== '[DONE]') {
+          yield chunk;
+        }
       }
     }
   } finally {
