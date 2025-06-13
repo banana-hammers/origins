@@ -8,13 +8,19 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       
       <main className="container max-w-screen-2xl py-10">
-        <div className="space-y-2 pb-8 pt-4 md:space-y-4 md:pb-10">
-          <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
+        <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 p-8 text-brand-50 shadow-lg">
+          <div className="absolute inset-0 -z-10 opacity-30 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]" />
+          <h1 className="text-4xl font-extrabold tracking-tight md:text-5xl">
             Rapid AI Prototyping Platform
           </h1>
-          <p className="text-muted-foreground max-w-[650px]">
+          <p className="mx-auto mt-2 max-w-2xl text-brand-50/90">
             Unleash the full potential of AI with our cutting-edge development platform! Create, experiment, and launch AI-powered applications in record time with our supercharged tech stack built for innovation.
           </p>
+          <div className="mt-6 flex justify-center">
+            <Button size="lg" asChild>
+              <a href="/auth/login">Get Started</a>
+            </Button>
+          </div>
         </div>
  
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
