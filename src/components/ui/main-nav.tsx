@@ -70,6 +70,7 @@ export function MainNav({ items }: MainNavProps = {}) {
             <>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
+
                   <Link
                     href="/planner"
                     className={cn(
@@ -78,7 +79,7 @@ export function MainNav({ items }: MainNavProps = {}) {
                       pathname === "/planner"
                         ? "text-foreground" 
                         : "text-muted-foreground hover:text-foreground/90"
-                    )}
+                  )}
                   >
                     Planner
                   </Link>
