@@ -70,13 +70,14 @@ export function MainNav({ items }: MainNavProps = {}) {
             <>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
-                  <Link 
-                  href="/planner"
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "transition-colors",
+
+                  <Link
+                    href="/planner"
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "transition-colors",
                       pathname === "/planner"
-                        ? "text-foreground"
+                        ? "text-foreground" 
                         : "text-muted-foreground hover:text-foreground/90"
                   )}
                   >
