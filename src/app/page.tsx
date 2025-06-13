@@ -124,7 +124,7 @@ export default function Home() {
         <div className="mt-10 flex justify-center">
           <Button asChild>
             <a href="https://github.com/banana-hammers/origins.git" target="_blank" rel="noopener noreferrer">
-              Get Github Repo
+              Get GitHub Repo
             </a>
           </Button>
         </div>
