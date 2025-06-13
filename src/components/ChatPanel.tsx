@@ -35,7 +35,7 @@ export function ChatPanel({ open, onOpenChange }: ChatPanelProps) {
       setMessages([
         {
           role: "assistant",
-          content: "Hello! I&apos;m your Lore Builder assistant. I can help you rapidly develop the seed and roots of your TTRPG campaign. What kind of world would you like to create?"
+          content: "Hello! I&aposm your planning assistant. How can I help you today?"
         }
       ]);
     }
@@ -62,7 +62,8 @@ export function ChatPanel({ open, onOpenChange }: ChatPanelProps) {
       
       // Create the prompt with conversation history for context
       const conversationHistory = messages.map(msg => `${msg.role}: ${msg.content}`).join("\n");
-      const prompt = `You are a Lore Builder, an AI assistant that helps tabletop role-playing game (TTRPG) game masters rapidly develop the seed and roots of their campaigns. Help the user create compelling settings, characters, factions, and plot hooks for their TTRPG campaign. Be creative, ask insightful questions, and provide detailed suggestions to help build a rich campaign world.\n\nConversation history:\n${conversationHistory}\n\nUser: ${message}\nAssistant:`;
+
+      const prompt = `You are a planning assistant that helps users organize and plan their tasks and projects. Offer clear suggestions, ask clarifying questions, and provide step-by-step guidance to achieve their goals.\n\nConversation history:\n${conversationHistory}\n\nUser: ${message}\nAssistant:`;
       
       // Stream the response and update the UI with each chunk
       await streamTextGenerationWithState(
@@ -119,10 +120,10 @@ export function ChatPanel({ open, onOpenChange }: ChatPanelProps) {
         <SheetHeader className="px-4 py-3 border-b">
           <div className="flex items-center">
             <ScrollText className="h-5 w-5 mr-2 text-primary" />
-            <SheetTitle>Lore Builder</SheetTitle>
+            <SheetTitle>Planner Assistant</SheetTitle>
           </div>
           <SheetDescription>
-            I&apos;ll help you craft your campaign world
+            I&apos;ll help you organize your tasks and projects
           </SheetDescription>
           <div className="mt-2">
             <div className="text-sm text-muted-foreground mb-1">AI Model:</div>

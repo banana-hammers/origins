@@ -1,3 +1,4 @@
+
 # Technical Specification: OpenAI Chat Side Panel for Planner Page
 
 ## Overview
@@ -8,6 +9,7 @@ We'll implement a side panel that slides in from the right when the user clicks 
 2. Create a `ChatMessage` component to render individual messages
 3. Create a `ChatInput` component for user input
 4. Update the Planner page to use these components
+
 
 ## Detailed Specifications
 
@@ -44,6 +46,7 @@ Key features:
 Location: `/src/app/planner/page.tsx`
 Purpose: Add the chat panel and connect it to the "Plan with AI" button
 
+
 Key changes:
 - Import the ChatPanel component
 - Add state to control panel visibility
@@ -61,6 +64,7 @@ We'll use the existing OpenAI integration:
 - Use the `streamTextGenerationWithState` function from `streamClient.ts`
 - Build conversation history to provide context
 - Use a system prompt that sets the context for planning tasks and schedules
+
 
 ## UI/UX Considerations
 - Add a smooth animation for the panel sliding in/out
