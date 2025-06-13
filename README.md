@@ -7,6 +7,7 @@ Origins is a full-stack Next.js application that integrates Model Context Protoc
 - Next.js App Router with React & TypeScript
 - Model Context Protocol (MCP) API integration
 - OpenAI API integration for text generation and embeddings
+- Interactive task-planner chat feature powered by OpenAI
 - GitHub OAuth login and user session management
 - Supabase client for authentication, database, and storage
 - Custom UI components library (Button, Card, Dialog, Form, Input, Label, LoginForm, Sheet)
