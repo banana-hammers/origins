@@ -1,7 +1,7 @@
-# Technical Specification: OpenAI Chat Side Panel for "Where are we" Button
+# Technical Specification: OpenAI Chat Side Panel for Task Planner
 
 ## Overview
-We'll implement a side panel that slides in from the right when the user clicks the "Where are we" button. This panel will contain a chat interface where users can interact with OpenAI to learn about their location in the fictional world.
+We'll implement a side panel that slides in from the right when the user starts the task planner. This panel will contain a chat interface where users can get help organizing their work.
 
 ## Component Structure
 1. Create a new `ChatPanel` component for the side panel
@@ -42,7 +42,7 @@ Key features:
 
 ### 4. Update Planner Page
 Location: `/src/app/planner/page.tsx`
-Purpose: Add the chat panel and connect it to the "Where are we" button
+Purpose: Add the chat panel and connect it to the task planner button
 
 Key changes:
 - Import the ChatPanel component
@@ -60,7 +60,7 @@ The following state will be needed:
 We'll use the existing OpenAI integration:
 - Use the `streamTextGenerationWithState` function from `streamClient.ts`
 - Build conversation history to provide context
-- Use a system prompt that sets the context for the chat about the fictional world
+- Use a system prompt that sets the context for helping the user plan tasks
 
 ## UI/UX Considerations
 - Add a smooth animation for the panel sliding in/out
@@ -95,12 +95,12 @@ We'll use the existing OpenAI integration:
 ### 4. Update the Planner Page
 1. Import the ChatPanel component in `/src/app/planner/page.tsx`
 2. Add state to control the panel's visibility
-3. Update the "Where are we" button to toggle the panel
+3. Update the planner button to toggle the panel
 4. Add the ChatPanel component to the JSX
 5. Pass the necessary props to control the panel
 
 ### 5. Test the Implementation
-1. Verify that the "Where are we" button opens the side panel
+1. Verify that the planner button opens the side panel
 2. Confirm that the welcome message appears when the panel opens
 3. Test sending messages and receiving responses
 4. Verify that the streaming responses work correctly
@@ -121,7 +121,7 @@ IMPLEMENTATION CHECKLIST:
 12. Add header with title and close button to panel
 13. Import ChatPanel component in `/src/app/planner/page.tsx`
 14. Add state to control panel visibility in planner page
-15. Update "Where are we" button to toggle panel
+15. Update the planner button to toggle panel
 16. Add ChatPanel component to planner page JSX
 17. Test button opens side panel correctly
 18. Verify welcome message appears when panel opens
