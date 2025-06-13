@@ -71,16 +71,16 @@ export function MainNav({ items }: MainNavProps = {}) {
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link 
-                    href="/lore" 
-                    className={cn(
-                      navigationMenuTriggerStyle(),
-                      "transition-colors",
-                      pathname === "/lore" 
-                        ? "text-foreground" 
+                  href="/planner"
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "transition-colors",
+                      pathname === "/planner"
+                        ? "text-foreground"
                         : "text-muted-foreground hover:text-foreground/90"
-                    )}
+                  )}
                   >
-                    Lore
+                    Planner
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
