@@ -7,7 +7,7 @@ We'll implement a side panel that slides in from the right when the user clicks 
 1. Create a new `ChatPanel` component for the side panel
 2. Create a `ChatMessage` component to render individual messages
 3. Create a `ChatInput` component for user input
-4. Update the lore page to use these components
+4. Update the planner page to use these components
 
 ## Detailed Specifications
 
@@ -40,8 +40,8 @@ Key features:
 - Disable input while waiting for AI response
 - Handle Enter key to send message
 
-### 4. Update Lore Page
-Location: `/src/app/lore/page.tsx`
+### 4. Update Planner Page
+Location: `/src/app/planner/page.tsx`
 Purpose: Add the chat panel and connect it to the "Where are we" button
 
 Key changes:
@@ -92,8 +92,8 @@ We'll use the existing OpenAI integration:
 7. Add scrolling container for the message history
 8. Add a header with title and close button
 
-### 4. Update the Lore Page
-1. Import the ChatPanel component in `/src/app/lore/page.tsx`
+### 4. Update the Planner Page
+1. Import the ChatPanel component in `/src/app/planner/page.tsx`
 2. Add state to control the panel's visibility
 3. Update the "Where are we" button to toggle the panel
 4. Add the ChatPanel component to the JSX
@@ -119,10 +119,10 @@ IMPLEMENTATION CHECKLIST:
 10. Add welcome message when panel first opens
 11. Add scrolling container for message history
 12. Add header with title and close button to panel
-13. Import ChatPanel component in `/src/app/lore/page.tsx`
-14. Add state to control panel visibility in lore page
+13. Import ChatPanel component in `/src/app/planner/page.tsx`
+14. Add state to control panel visibility in planner page
 15. Update "Where are we" button to toggle panel
-16. Add ChatPanel component to lore page JSX
+16. Add ChatPanel component to planner page JSX
 17. Test button opens side panel correctly
 18. Verify welcome message appears when panel opens
 19. Test sending messages and receiving responses

@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 import { ScrollText } from "lucide-react";
 import { ChatPanel } from "@/components/ChatPanel";
 
-export default function LorePage() {
+export default function PlannerPage() {
   const { user, loading } = useAuth();
   const [chatOpen, setChatOpen] = useState(false);
 
@@ -29,24 +29,24 @@ export default function LorePage() {
       <main className="container max-w-screen-2xl py-10">
         <div className="space-y-2 pb-8 pt-4 md:space-y-4 md:pb-10">
           <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-            Lore Builder
+            Task Planner
           </h1>
           <p className="text-muted-foreground max-w-[650px]">
-            Design and develop your tabletop role-playing game campaign world.
+            Plan and track your tasks effectively.
           </p>
         </div>
 
         <Card className="w-full max-w-md mx-auto">
           <CardHeader>
-            <CardTitle>Lore Builder</CardTitle>
+            <CardTitle>Task Planner</CardTitle>
             <CardDescription>
-              Create the foundation of your TTRPG campaign.
+              Organize tasks and stay productive.
             </CardDescription>
           </CardHeader>
           <CardContent className="flex justify-center py-6">
             <Button size="lg" className="w-full max-w-xs" onClick={() => setChatOpen(true)}>
               <ScrollText className="mr-2 h-5 w-5" />
-              Build My Campaign
+              Start Planning
             </Button>
           </CardContent>
         </Card>
