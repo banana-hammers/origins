@@ -18,7 +18,7 @@ export default function Home() {
           </p>
           <div className="mt-6 flex justify-center">
             <Button size="lg" asChild>
-              <a href="/auth/login">Get Started</a>
+              <a href="/auth">Get Started</a>
             </Button>
           </div>
         </div>
