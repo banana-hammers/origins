@@ -1,4 +1,4 @@
-import { createParser, type EventSourceMessage } from 'eventsource-parser';
+// import from eventsource-parser was removed when parseSSEStream was deleted
 
 /**
  * Creates a TransformStream that converts OpenAI chat completion chunks into text fragments
@@ -119,36 +119,4 @@ export function createEventStream(response: ReadableStream<Uint8Array>): Readabl
       }
     }
   });
-}
-
-/**
- * Parses a Server-Sent Events (SSE) stream into a stream of events
- * @param data The SSE stream
- */
-export async function* parseSSEStream(data: ReadableStream<Uint8Array>) {
-  // Fix parser creation with proper callbacks
-  const parser = createParser({
-    onEvent: (event: EventSourceMessage) => {
-      // Check for event data
-      return event.data;
-    }
-  });
-  
-  const reader = data.getReader();
-  const decoder = new TextDecoder();
-  
-  try {
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      
-      const text = decoder.decode(value);
-      parser.feed(text);
-      if (text && text !== 'data: [DONE]') {
-        yield text;
-      }
-    }
-  } finally {
-    reader.releaseLock();
-  }
 }
