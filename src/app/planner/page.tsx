@@ -32,7 +32,7 @@ export default function PlannerPage() {
             Task Planner
           </h1>
           <p className="text-muted-foreground max-w-[650px]">
-            Plan and track your tasks effectively.
+            Plan upcoming projects, organize tasks and collaborate with the AI assistant.
           </p>
         </div>
 
@@ -40,10 +40,24 @@ export default function PlannerPage() {
           <CardHeader>
             <CardTitle>Task Planner</CardTitle>
             <CardDescription>
-              Organize tasks and stay productive.
+              Create tasks, break down projects and manage your schedule with help from our AI assistant.
             </CardDescription>
           </CardHeader>
-          <CardContent className="flex justify-center py-6">
+          <CardContent className="space-y-4 py-6 text-sm">
+            <div className="space-y-2">
+              <div className="flex items-start">
+                <span className="mr-2 text-primary">•</span>
+                <span>Create and track tasks</span>
+              </div>
+              <div className="flex items-start">
+                <span className="mr-2 text-primary">•</span>
+                <span>Collaborate with the AI assistant to break down projects</span>
+              </div>
+              <div className="flex items-start">
+                <span className="mr-2 text-primary">•</span>
+                <span>Schedule deadlines and monitor progress</span>
+              </div>
+            </div>
             <Button size="lg" className="w-full max-w-xs" onClick={() => setChatOpen(true)}>
               <ScrollText className="mr-2 h-5 w-5" />
               Start Planning
