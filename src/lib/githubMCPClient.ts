@@ -26,12 +26,4 @@ const githubMCPClientConfig = {
   }
 };
 
-const GITHUB_MCP_URL = process.env.GITHUB_MCP_URL || "http://localhost:3001";
-
-export async function fetchGitHubMCP(path: string, options?: RequestInit) {
-  const res = await fetch(`${GITHUB_MCP_URL}${path}`, options);
-  if (!res.ok) throw new Error(`GitHub MCP error: ${res.statusText}`);
-  return res.json();
-}
-
 export default githubMCPClientConfig;
