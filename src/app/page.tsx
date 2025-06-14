@@ -6,11 +6,11 @@ import { Globe, FileCode, LayoutDashboard, ArrowRight } from "lucide-react";
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
-      
-      <main className="container max-w-screen-2xl py-10">
-        <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 p-8 text-brand-50 shadow-lg">
+
+      <main className="container max-w-screen-2xl space-y-10 py-10">
+        <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 p-6 text-center text-brand-50 shadow-lg sm:p-8 md:p-12 md:text-left">
           <div className="absolute inset-0 -z-10 opacity-30 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]" />
-          <h1 className="text-4xl font-extrabold tracking-tight md:text-5xl">
+          <h1 className="mx-auto max-w-xl text-4xl font-extrabold tracking-tight md:text-5xl">
             Rapid AI Prototyping Platform
           </h1>
           <p className="mx-auto mt-2 max-w-2xl text-brand-50/90">
