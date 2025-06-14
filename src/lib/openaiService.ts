@@ -8,13 +8,13 @@ const openai = new OpenAI({
 /**
  * Generate text using OpenAI's GPT model
  * @param prompt The prompt to send to the API
- * @param model The model to use (defaults to gpt-4o-mini)
+ * @param model The model to use (defaults to gpt-4.1-nano)
  * @param maxTokens Maximum number of tokens to generate
  * @param stream Whether to stream the response (defaults to false)
  */
 export async function generateText(
   prompt: string,
-  model: string = 'gpt-4o-mini',
+  model: string = 'gpt-4.1-nano',
   maxTokens: number = 500,
   stream: boolean = false
 ) {
