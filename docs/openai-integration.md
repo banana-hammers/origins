@@ -14,8 +14,9 @@ You can add this to your `.env.local` file for local development. The OpenAI int
 
 ## Available Models
 
-The default model for text generation is `gpt-4o-mini`. The following models are supported:
+The default model for text generation is `gpt-4.1-nano`. The following models are supported:
 
+- `gpt-4.1-nano` - Tiny and fast GPT-4.1 model
 - `gpt-4o-mini` - Smaller, faster version of GPT-4o
 - `gpt-4o` - Full-sized GPT-4o model
 
@@ -37,7 +38,7 @@ const response = await fetch('/api/openai', {
   body: JSON.stringify({
     text: 'Your prompt here',
     type: 'completion',  // Optional, defaults to 'completion'
-    model: 'gpt-4o-mini',// Optional, defaults to 'gpt-4o-mini'
+    model: 'gpt-4.1-nano',// Optional, defaults to 'gpt-4.1-nano'
     maxTokens: 500       // Optional, defaults to 500
   }),
 });
@@ -59,7 +60,7 @@ const response = await fetch('/api/openai', {
   body: JSON.stringify({
     text: 'Your prompt here',
     type: 'completion',
-    model: 'gpt-4o-mini', // Optional, defaults to 'gpt-4o-mini'
+    model: 'gpt-4.1-nano', // Optional, defaults to 'gpt-4.1-nano'
     maxTokens: 500,       // Optional, defaults to 500
     stream: true          // Enable streaming
   }),
@@ -110,7 +111,7 @@ function ChatComponent() {
         });
       },
       {
-        model: 'gpt-4o-mini',
+        model: 'gpt-4.1-nano',
         maxTokens: 1000,
         onComplete: (fullText) => console.log('Stream complete')
       }
