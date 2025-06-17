@@ -1,4 +1,4 @@
 export const siteConfig = {
   name: "Origins",
-  description: "Rapid AI Prototyping Platform",
+  description: "Build AI apps in days, not weeks",
 }

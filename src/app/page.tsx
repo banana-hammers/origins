@@ -11,10 +11,10 @@ export default function Home() {
         <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 p-6 text-center text-brand-50 shadow-lg sm:p-8 md:p-12 md:text-left">
           <div className="absolute inset-0 -z-10 opacity-30 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]" />
           <h1 className="mx-auto max-w-xl text-4xl font-extrabold tracking-tight md:text-5xl">
-            Rapid AI Prototyping Platform
+            Build AI apps in days, not weeks
           </h1>
           <p className="mx-auto mt-2 max-w-2xl text-brand-50/90">
-            Unleash the full potential of AI with our cutting-edge development platform! Create, experiment, and launch AI-powered applications in record time with our supercharged tech stack built for innovation.
+            Origins removes the busywork so you can focus on innovation. Create, test and deploy AI features with a streamlined toolkit.
           </p>
           <div className="mt-6 flex justify-center">
             <Button size="lg" asChild>
